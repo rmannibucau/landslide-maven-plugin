@@ -59,7 +59,7 @@
         <executions>
           <execution>
             <id>clone-jinja2</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
@@ -72,7 +72,7 @@
           </execution>
           <execution>
             <id>clone-markdown</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
@@ -85,7 +85,7 @@
           </execution>
           <execution>
             <id>clone-markupsafe</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
@@ -98,7 +98,7 @@
           </execution>
           <execution>
             <id>clone-pygments</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
@@ -111,7 +111,7 @@
           </execution>
           <execution>
             <id>clone-landslide</id>
-            <phase>initialize</phase>
+            <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
