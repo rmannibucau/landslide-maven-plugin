@@ -66,8 +66,8 @@ public class LandSlideMojo extends AbstractMojo {
     @Parameter(property = NAME + ".presenter-mode", defaultValue = "false")
     private boolean presenterMode;
 
-    @Parameter(property = NAME + ".watch", defaultValue = "false")
-    private boolean watch;
+    @Parameter(property = NAME + ".watch", defaultValue = "-1")
+    private int watch;
 
     @Parameter(property = NAME + ".encoding")
     private String encoding;
@@ -80,7 +80,11 @@ public class LandSlideMojo extends AbstractMojo {
         mkdirs(destination.getParentFile());
 
         final File themeDirectory = findThemeDirectory();
-        if (watch) { // impl it with java since watchdog python depends on native
+        if (watch > 0) { // impl it with java since watchdog python depends on native
+            if (watch < 100) { // user configured seconds, convert it to ms
+                watch *= 1000;
+            }
+
             final FileAlterationObserver observer;
             if (source.isFile()) {
                 observer = new FileAlterationObserver(source.getParentFile(), new NameFileFilter(source.getName()));
@@ -88,7 +92,7 @@ public class LandSlideMojo extends AbstractMojo {
                 observer = new FileAlterationObserver(source, new SuffixFileFilter(new String[] { ".md", ".markdown" }));
             }
 
-            final FileAlterationMonitor monitor = new FileAlterationMonitor(2000);
+            final FileAlterationMonitor monitor = new FileAlterationMonitor(watch);
             final FileAlterationListener listener = new FileAlterationListenerAdaptor() {
                 @Override
                 public void onFileCreate(final File file) {
@@ -116,7 +120,6 @@ public class LandSlideMojo extends AbstractMojo {
             } catch (final Exception e) {
                 throw new MojoExecutionException(e.getMessage(), e);
             }
-
 
             runLandSlide(themeDirectory);
 
