@@ -2,9 +2,7 @@ package com.github.rmannibucau.maven.landslide;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.commons.io.filefilter.NameFileFilter;
-import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.io.monitor.FileAlterationListener;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
@@ -197,14 +195,14 @@ public class LandSlideMojo extends AbstractMojo {
         }
     }
 
-    private File findThemeDirectory() throws LandSlidePluginException {
+    private File findThemeDirectory() throws MojoExecutionException {
         final File themeDir;
         if (theme == null) {
             themeDir = extractDefaultThemes(new File("target/landslide-work/theme"));
         } else {
             themeDir = theme;
             if (!themeDir.exists()) {
-                throw new LandSlidePluginException("Theme folder " + theme + " doesn't exist");
+                throw new MojoExecutionException("Theme folder " + theme + " doesn't exist");
             }
         }
         return themeDir;

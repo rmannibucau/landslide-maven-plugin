@@ -15,3 +15,11 @@ Usage:
         </configuration>
       </plugin>
 
+# Notes for developers
+
+* The build integrates python dependencies automatically in the jar.
+* mainmojo.py is mainly main.py from landslide with the following changes:
+    * remove sys.exit calls
+    * use args as parameter instead of relying on sys.argv
+    * this file needs to be synchronized with main.py when upgrading landslide
+* runner.py the wrapper called from java

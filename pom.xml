@@ -32,6 +32,13 @@
       <artifactId>commons-io</artifactId>
       <version>2.4</version>
     </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -119,7 +126,7 @@
         <version>1.8</version>
         <executions>
           <execution>
-            <id>add-jinja2</id>
+            <id>add-clones</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>add-resource</goal>
@@ -130,62 +137,18 @@
                   <directory>${dependencies.base}/jinja2/jinja2</directory>
                   <targetPath>${project.build.outputDirectory}/jinja2</targetPath>
                 </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add-markdown</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
                 <resource>
                   <directory>${dependencies.base}/markdown/markdown</directory>
                   <targetPath>${project.build.outputDirectory}/markdown</targetPath>
                 </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add-markupsafe</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
                 <resource>
                   <directory>${dependencies.base}/markupsafe/markupsafe</directory>
                   <targetPath>${project.build.outputDirectory}/markupsafe</targetPath>
                 </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add-pygments</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
                 <resource>
                   <directory>${dependencies.base}/pygments/pygments</directory>
                   <targetPath>${project.build.outputDirectory}/pygments</targetPath>
                 </resource>
-              </resources>
-            </configuration>
-          </execution>
-          <execution>
-            <id>add-landslide</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-resource</goal>
-            </goals>
-            <configuration>
-              <resources>
                 <resource>
                   <directory>${dependencies.base}/landslide/src/landslide</directory>
                   <targetPath>${project.build.outputDirectory}/landslide</targetPath>
@@ -221,7 +184,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
-        <version>3.0</version>
+        <version>3.2</version>
       </plugin>
     </plugins>
   </reporting>
