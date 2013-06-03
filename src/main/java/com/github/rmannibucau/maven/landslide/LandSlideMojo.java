@@ -100,7 +100,7 @@ public class LandSlideMojo extends AbstractMojo {
             InputStream is = null;
             FileOutputStream out = null;
             try {
-                is = LandSlideMojo.class.getResourceAsStream("/themes/default/" + s);
+                is = LandSlideMojo.class.getResourceAsStream("/landslide/themes/default/" + s);
                 out = new FileOutputStream(copyTo);
                 IOUtils.copy(is, out);
             } catch (final IOException e) {

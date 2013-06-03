@@ -1,7 +1,7 @@
 import sys
-from landslide import main
+from landslide import mainwithnoexit
 
 try:
-    main.main(args)
+    mainwithnoexit.main(args)
 except Exception as e:
     print e
