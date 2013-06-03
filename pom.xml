@@ -55,6 +55,8 @@
             <configuration>
               <connectionUrl>scm:git:https://github.com/mitsuhiko/jinja2.git</connectionUrl>
               <checkoutDirectory>${dependencies.base}/jinja2</checkoutDirectory>
+              <scmVersion>2.7</scmVersion>
+              <scmVersionType>tag</scmVersionType>
             </configuration>
           </execution>
           <execution>
@@ -66,6 +68,8 @@
             <configuration>
               <connectionUrl>scm:git:https://github.com/waylan/Python-Markdown.git</connectionUrl>
               <checkoutDirectory>${dependencies.base}/markdown</checkoutDirectory>
+              <scmVersion>2.3.1.final</scmVersion>
+              <scmVersionType>tag</scmVersionType>
             </configuration>
           </execution>
           <execution>
@@ -77,6 +81,8 @@
             <configuration>
               <connectionUrl>scm:git:https://github.com/mitsuhiko/markupsafe.git</connectionUrl>
               <checkoutDirectory>${dependencies.base}/markupsafe</checkoutDirectory>
+              <scmVersion>0.18</scmVersion>
+              <scmVersionType>tag</scmVersionType>
             </configuration>
           </execution>
           <execution>
@@ -88,6 +94,8 @@
             <configuration>
               <connectionUrl>scm:hg:http://bitbucket.org/birkenfeld/pygments-main</connectionUrl>
               <checkoutDirectory>${dependencies.base}/pygments</checkoutDirectory>
+              <scmVersion>0.11.1</scmVersion>
+              <scmVersionType>tag</scmVersionType>
             </configuration>
           </execution>
           <execution>
@@ -99,6 +107,8 @@
             <configuration>
               <connectionUrl>scm:git:https://github.com/adamzap/landslide.git</connectionUrl>
               <checkoutDirectory>${dependencies.base}/landslide</checkoutDirectory>
+              <scmVersion>v1.1.1</scmVersion>
+              <scmVersionType>tag</scmVersionType>
             </configuration>
           </execution>
         </executions>
