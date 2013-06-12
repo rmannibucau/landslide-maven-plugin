@@ -23,3 +23,16 @@ Usage:
     * use args as parameter instead of relying on sys.argv
     * this file needs to be synchronized with main.py when upgrading landslide
 * runner.py the wrapper called from java
+
+# Common usage
+
+To invoke the plugin just invoke:
+
+    mvn landslide:landslide
+
+And in write mode it is quite easy to use:
+
+    mvn landslide:landslide -Dlandslide.watch=1
+
+It will poll the sources to auto-update the destination.
+
