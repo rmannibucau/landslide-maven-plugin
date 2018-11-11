@@ -1,5 +1,22 @@
 package com.github.rmannibucau.maven.landslide;
 
+import static java.util.Arrays.asList;
+import static org.apache.commons.io.FileUtils.copyDirectory;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import javax.script.SimpleBindings;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
@@ -15,20 +32,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.python.core.PyList;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import javax.script.SimpleBindings;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 @Mojo(name = LandSlideMojo.NAME, defaultPhase = LifecyclePhase.PRE_SITE)
 public class LandSlideMojo extends AbstractMojo {
@@ -142,7 +145,10 @@ public class LandSlideMojo extends AbstractMojo {
     }
 
     private List<String> buildArgs(final File themeDir) {
-        final List<String> args = new ArrayList<String>(Arrays.asList(source.getAbsolutePath(), "-d", destination.getAbsolutePath(), "-t", themeDir.getAbsolutePath()));
+        final List<String> args = new ArrayList<String>(asList(
+                source.getAbsolutePath(),
+                "-d", destination.getAbsolutePath(),
+                "-t", themeDir.getAbsolutePath()));
         if (extensions != null && !extensions.isEmpty()) {
             args.add("-x");
             args.add(extensions);
@@ -150,9 +156,11 @@ public class LandSlideMojo extends AbstractMojo {
         if (embed) {
             args.add("-i");
         }
+        /* landslide does it relatively to cwd which is wrong here, we do it in java then
         if (copyTheme) {
             args.add("-c");
         }
+        */
         if (debug) {
             args.add("-b");
         }
@@ -173,6 +181,9 @@ public class LandSlideMojo extends AbstractMojo {
             args.add("-l");
             args.add(lineos);
         }
+        if (getLog().isDebugEnabled()) {
+            getLog().debug("Launching " + args);
+        }
         return args;
     }
 
@@ -189,6 +200,13 @@ public class LandSlideMojo extends AbstractMojo {
                 throw new MojoFailureException(bindings.get("e").toString());
             }
 
+            if (copyTheme) {
+                try {
+                    copyDirectory(themeDir, new File(destination.getParentFile(), "theme"));
+                } catch (final IOException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
             getLog().info("Rendered " + destination.getPath());
         } catch (final ScriptException e) {
             throw new MojoFailureException(e.getMessage(), e);
@@ -210,7 +228,7 @@ public class LandSlideMojo extends AbstractMojo {
 
     private static File extractDefaultThemes(final File base) { // theme uses file base path so just extract it
         mkdirs(base);
-        for (final String s : Arrays.asList("css/print.css", "css/screen.css", "js/slides.js", "base.html")) {
+        for (final String s : asList("css/print.css", "css/screen.css", "js/slides.js", "base.html")) {
             final File copyTo = new File(base, s);
             mkdirs(copyTo.getParentFile());
 
