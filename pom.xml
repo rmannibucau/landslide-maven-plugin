@@ -10,7 +10,7 @@
 
   <groupId>com.github.rmannibucau</groupId>
   <artifactId>landslide-maven-plugin</artifactId>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
   <packaging>maven-plugin</packaging>
   <name>Landslide Maven plugin</name>
 
